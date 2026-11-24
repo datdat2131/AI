@@ -61,8 +61,3 @@ Mặc định dùng Messages API của Anthropic (`format: "anthropic"`, model `
 - Câu trả lời của AI hiển thị dạng văn bản thuần (không thể chèn mã màu hay link click được).
 - Nội dung `knowledge.yml` và số liệu admin được gửi tới dịch vụ AI: đừng ghi bí mật vào đó.
 - `/astraai report` lưu báo cáo vào `plugins/AstraxAI/reports/`.
-
-## GitHub Actions build (flat source)
-
-The repository must have the flat source files at repository root, and the workflow at `.github/workflows/build.yml`.
-Commit/push to `main` or run the workflow manually. The Action restores Maven structure, builds, verifies `plugin.yml` is embedded in the JAR, and uploads the `AstraxAI` artifact.

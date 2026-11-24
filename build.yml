@@ -12,26 +12,37 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout source
+      - name: Checkout flat source
         uses: actions/checkout@v4
-
       - name: Set up Java 21
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '21'
           cache: maven
-
-      # Maven da duoc cai san tren ubuntu-latest; buoc nay xac nhan phien ban dang dung.
-      - name: Show Maven and Java versions
-        run: mvn -version
-
-      - name: Build with Maven
-        run: mvn -B clean package
-
-      - name: Upload AstraxAI.jar
+      - name: Restore Maven project from flat files
+        run: bash ./restore.sh
+      - name: Verify descriptor before build
+        run: test -f AstraxAI/src/main/resources/plugin.yml && grep -q '^main: com.astrax.ai.AstraxAI$' AstraxAI/src/main/resources/plugin.yml
+      - name: Build with Maven in restored project
+        run: mvn -B -f AstraxAI/pom.xml clean package
+      - name: Verify final JAR contents
+        shell: bash
+        run: |
+          JAR_FILE="AstraxAI/target/AstraxAI.jar"
+          test -f "$JAR_FILE"
+          jar tf "$JAR_FILE" | grep -Fx 'plugin.yml'
+          jar tf "$JAR_FILE" | grep -Fx 'config.yml'
+          jar tf "$JAR_FILE" | grep -Fx 'knowledge.yml'
+          jar tf "$JAR_FILE" | grep -Fx 'com/astrax/ai/AstraxAI.class'
+          if jar tf "$JAR_FILE" | grep -q '^AstraxAI/'; then
+            echo 'ERROR: JAR contains nested project folder entries'
+            exit 1
+          fi
+      - name: Upload AstraxAI plugin
         uses: actions/upload-artifact@v4
         with:
           name: AstraxAI
-          path: target/AstraxAI.jar
+          path: AstraxAI/target/AstraxAI.jar
           if-no-files-found: error
+          retention-days: 14
