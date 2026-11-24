@@ -26,7 +26,7 @@ mkdir -p "src/main/java/com/astrax/ai/memory" && cp "../ChatMemory.java" "src/ma
 mkdir -p "src/main/resources" && cp "../knowledge.yml" "src/main/resources/knowledge.yml"
 mkdir -p "src/main/resources" && cp "../plugin.yml" "src/main/resources/plugin.yml"
 mkdir -p "src/main/resources" && cp "../config.yml" "src/main/resources/config.yml"
-mkdir -p ".github/workflows" && cp "../build.yml" ".github/workflows/build.yml"
+mkdir -p ".github/workflows" && cp "../.github/workflows/build.yml" ".github/workflows/build.yml"
 mkdir -p "." && cp "../README.md" "README.md"
 mkdir -p "." && cp "../pom.xml" "pom.xml"
 mkdir -p "." && cp "../.gitignore" ".gitignore"
