@@ -1,0 +1,38 @@
+name: AstraxAI
+version: '${project.version}'
+main: com.astrax.ai.AstraxAI
+api-version: '1.21'
+authors: [Astrax]
+description: "Trợ lý AI cho server Minecraft"
+load: POSTWORLD
+
+commands:
+  ai:
+    description: "Trò chuyện với trợ lý AI"
+    usage: "/<command> <tin nhắn | clear | help | menu>"
+  astraai:
+    description: "Công cụ AI dành cho quản trị viên"
+    usage: "/<command> <status | reload | diagnose | report>"
+    aliases: [astraxai]
+
+permissions:
+  astraxai.chat:
+    description: "Sử dụng AI chat"
+    default: true
+  astraxai.gui:
+    description: "Mở menu GUI của AstraxAI"
+    default: true
+  astraxai.admin:
+    description: "Sử dụng Admin AI (status, diagnose, report)"
+    default: op
+  astraxai.reload:
+    description: "Reload cấu hình AstraxAI"
+    default: op
+  astraxai.*:
+    description: "Tất cả quyền của AstraxAI"
+    default: op
+    children:
+      astraxai.chat: true
+      astraxai.gui: true
+      astraxai.admin: true
+      astraxai.reload: true

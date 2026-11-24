@@ -1,0 +1,68 @@
+# =====================================================================
+# AstraxAI - Dữ liệu kiến thức về server
+#
+# AI chỉ dùng file này để trả lời về server của bạn (rank, boss, relic...).
+# Nếu thông tin không có trong file, AI sẽ nói là không biết thay vì bịa.
+#
+# NỘI DUNG BÊN DƯỚI CHỈ LÀ VÍ DỤ - HÃY THAY BẰNG DỮ LIỆU THẬT CỦA SERVER.
+# Bạn có thể thêm/bớt mục tùy ý, mỗi mục có thể lồng nhau.
+# Dùng /astraai reload để áp dụng thay đổi.
+#
+# CẢNH BÁO: Toàn bộ nội dung file này được gửi tới dịch vụ AI. Đừng đặt
+# mật khẩu, token, IP riêng tư hay thông tin nhạy cảm vào đây.
+# =====================================================================
+
+server:
+  name: "Server Của Bạn"
+  mode: "Survival RPG (ví dụ)"
+  description: "Đây là ví dụ. Hãy mô tả ngắn gọn server của bạn ở đây."
+
+features:
+  - "Ví dụ: Hệ thống rank và quyền lợi theo cấp bậc"
+  - "Ví dụ: Boss theo sự kiện và phần thưởng Relic"
+  - "Ví dụ: Nhiệm vụ hằng ngày (Quest)"
+
+ranks:
+  member:
+    name: "Member (ví dụ)"
+    how-to-get: "Mặc định khi vào server"
+    perks:
+      - "Sử dụng các lệnh cơ bản"
+  vip:
+    name: "VIP (ví dụ)"
+    how-to-get: "Liên hệ staff hoặc xem cửa hàng của server"
+    perks:
+      - "Ví dụ: Thêm 1 home"
+
+bosses:
+  void-dragon:
+    name: "Rồng Hư Không (ví dụ)"
+    location: "Ví dụ: The End"
+    how-to-fight: "Ví dụ: Mang giáp tốt và cung tên; tránh đứng gần vực."
+    rewards:
+      - "Ví dụ: Mảnh Relic Hư Không"
+
+relics:
+  void-shard:
+    name: "Mảnh Relic Hư Không (ví dụ)"
+    how-to-get: "Rơi ra từ Rồng Hư Không (ví dụ)"
+    effect: "Ví dụ: Tăng tốc độ di chuyển nhẹ khi cầm trên tay"
+
+quests:
+  daily-mining:
+    name: "Thợ mỏ chăm chỉ (ví dụ)"
+    description: "Đào 200 khối đá trong ngày"
+    reward: "Ví dụ: 100 xu"
+
+rules:
+  - "Ví dụ: Tôn trọng người chơi khác, không chửi thề"
+  - "Ví dụ: Không dùng hack, cheat hay lợi dụng lỗi game"
+  - "Ví dụ: Không spam chat hoặc quảng cáo"
+
+guide:
+  - "Ví dụ: Người chơi mới nên bắt đầu bằng việc lập nhà và thu thập tài nguyên cơ bản."
+  - "Ví dụ: Dùng /ai để hỏi trợ lý AI về server."
+
+# Ghi chú bổ sung (không bắt buộc)
+extra:
+  - "Ví dụ: Liên hệ staff trên Discord nếu cần hỗ trợ thêm."

@@ -1,0 +1,21 @@
+# Build
+target/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.classpath
+.project
+.settings/
+
+# Bi mat - khong bao gio commit
+.env
+*.key
+secrets.*
+
+# Du lieu chay thu tren server
+plugins/
+run/
+logs/
+reports/

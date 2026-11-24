@@ -1,0 +1,68 @@
+# =====================================================================
+# AstraxAI - Cấu hình
+# Sau khi sửa, dùng lệnh /astraai reload để áp dụng (trừ "advanced.threads").
+# =====================================================================
+
+api:
+  # API Key của bạn. Để trống nếu muốn dùng biến môi trường ASTRAXAI_API_KEY.
+  # KHÔNG chia sẻ file này và KHÔNG commit file này có key lên GitHub.
+  key: ""
+
+  # Địa chỉ API. Bắt buộc phải là HTTPS.
+  url: "https://api.anthropic.com/v1/messages"
+
+  # Định dạng API: "anthropic" (Messages API của Anthropic)
+  #            hoặc "openai" (API tương thích OpenAI /v1/chat/completions)
+  format: "anthropic"
+
+  # Phiên bản API (chỉ dùng khi format = anthropic)
+  anthropic-version: "2023-06-01"
+
+  # Tên model
+  model: "claude-haiku-5-5"
+
+  # Số token tối đa cho mỗi câu trả lời của AI Chat
+  max-tokens: 500
+
+  # Số token tối đa cho phần phân tích của Admin AI
+  admin-max-tokens: 1000
+
+  # Thời gian chờ tối đa (giây) trước khi coi là timeout
+  timeout-seconds: 30
+
+chat:
+  # Bật/tắt AI Chat (/ai)
+  enabled: true
+
+  # Thời gian chờ giữa 2 câu hỏi của cùng 1 người chơi (giây)
+  cooldown-seconds: 5
+
+  # Độ dài tối đa của 1 tin nhắn gửi cho AI (ký tự)
+  max-message-length: 300
+
+  # Sau khi bấm nút "Chat với AI" trong menu, người chơi có bao nhiêu giây để gõ câu hỏi
+  input-timeout-seconds: 30
+
+memory:
+  # Bật/tắt bộ nhớ hội thoại (lưu theo UUID từng người chơi, chỉ lưu trong RAM)
+  enabled: true
+
+  # Số tin nhắn tối đa lưu cho mỗi người chơi (gồm cả câu hỏi và câu trả lời)
+  max-history: 10
+
+  # Xóa lịch sử khi người chơi thoát server
+  clear-on-quit: true
+
+admin:
+  # Bật/tắt Admin AI (/astraai diagnose, /astraai report và nút Trợ lý Admin)
+  enabled: true
+
+  # Thời gian chờ giữa 2 lần phân tích của Admin AI (giây)
+  cooldown-seconds: 30
+
+advanced:
+  # Số luồng (thread) xử lý API (cần khởi động lại server để áp dụng)
+  threads: 2
+
+  # Số ký tự tối đa của dữ liệu knowledge.yml gửi cho AI
+  knowledge-max-chars: 12000
