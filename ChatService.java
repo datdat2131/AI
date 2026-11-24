@@ -1,14 +1,5 @@
-package com.astrax.ai.chat;
+package com.astrax.ai;
 
-import com.astrax.ai.AstraxAI;
-import com.astrax.ai.api.AiResult;
-import com.astrax.ai.api.ChatMessage;
-import com.astrax.ai.memory.ChatMemory;
-import com.astrax.ai.util.CooldownManager;
-import com.astrax.ai.util.Sanitizer;
-import com.astrax.ai.util.Sched;
-import com.astrax.ai.util.Settings;
-import com.astrax.ai.util.Text;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 

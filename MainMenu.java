@@ -1,7 +1,5 @@
-package com.astrax.ai.gui;
+package com.astrax.ai;
 
-import com.astrax.ai.AstraxAI;
-import com.astrax.ai.util.Text;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

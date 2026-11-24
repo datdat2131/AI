@@ -1,12 +1,5 @@
-package com.astrax.ai.admin;
+package com.astrax.ai;
 
-import com.astrax.ai.AstraxAI;
-import com.astrax.ai.api.AiResult;
-import com.astrax.ai.api.ChatMessage;
-import com.astrax.ai.util.CooldownManager;
-import com.astrax.ai.util.Sched;
-import com.astrax.ai.util.Settings;
-import com.astrax.ai.util.Text;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;

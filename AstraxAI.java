@@ -1,19 +1,5 @@
 package com.astrax.ai;
 
-import com.astrax.ai.admin.AdminService;
-import com.astrax.ai.admin.ServerMonitor;
-import com.astrax.ai.admin.WarningTracker;
-import com.astrax.ai.api.AiClient;
-import com.astrax.ai.chat.ChatInputManager;
-import com.astrax.ai.chat.ChatListener;
-import com.astrax.ai.chat.ChatService;
-import com.astrax.ai.chat.KnowledgeBase;
-import com.astrax.ai.command.AdminCommand;
-import com.astrax.ai.command.AiCommand;
-import com.astrax.ai.gui.GuiListener;
-import com.astrax.ai.gui.MainMenu;
-import com.astrax.ai.memory.ChatMemory;
-import com.astrax.ai.util.Settings;
 import org.bukkit.Bukkit;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.command.TabExecutor;

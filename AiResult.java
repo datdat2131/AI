@@ -1,4 +1,4 @@
-package com.astrax.ai.api;
+package com.astrax.ai;
 
 /** Kết quả một lần gọi API AI: thành công (có text) hoặc thất bại (có loại lỗi). */
 public record AiResult(boolean success, String text, Type error, String detail) {

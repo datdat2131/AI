@@ -1,4 +1,4 @@
-package com.astrax.ai.util;
+package com.astrax.ai;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;

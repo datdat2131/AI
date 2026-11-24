@@ -1,4 +1,4 @@
-package com.astrax.ai.util;
+package com.astrax.ai;
 
 import org.bukkit.configuration.file.FileConfiguration;
 

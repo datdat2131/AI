@@ -1,7 +1,5 @@
-package com.astrax.ai.command;
+package com.astrax.ai;
 
-import com.astrax.ai.AstraxAI;
-import com.astrax.ai.util.Text;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;

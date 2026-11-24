@@ -1,6 +1,5 @@
-package com.astrax.ai.admin;
+package com.astrax.ai;
 
-import com.astrax.ai.AstraxAI;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.plugin.Plugin;
