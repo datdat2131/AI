@@ -1,5 +1,6 @@
-package com.astrax.ai;
+package com.astrax.ai.memory;
 
+import com.astrax.ai.api.ChatMessage;
 
 import java.util.ArrayList;
 import java.util.List;

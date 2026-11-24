@@ -1,4 +1,4 @@
-package com.astrax.ai;
+package com.astrax.ai.admin;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;

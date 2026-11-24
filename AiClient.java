@@ -1,5 +1,6 @@
-package com.astrax.ai;
+package com.astrax.ai.api;
 
+import com.astrax.ai.util.Settings;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;

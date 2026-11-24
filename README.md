@@ -61,3 +61,20 @@ Mặc định dùng Messages API của Anthropic (`format: "anthropic"`, model `
 - Câu trả lời của AI hiển thị dạng văn bản thuần (không thể chèn mã màu hay link click được).
 - Nội dung `knowledge.yml` và số liệu admin được gửi tới dịch vụ AI: đừng ghi bí mật vào đó.
 - `/astraai report` lưu báo cáo vào `plugins/AstraxAI/reports/`.
+
+## 6. Menu Rank và thanh toán (shop.yml)
+
+- File `plugins/AstraxAI/shop.yml` chứa bảng giá rank, tài khoản ngân hàng, link mã QR (`qr-url`) và link Discord (`discord-url`). Sửa xong dùng `/astraai reload`.
+- Người chơi gõ `/ai` có chữ như rank, nạp, donate, bảng giá, bank... hoặc bấm nút "Hỏi về Rank" sẽ mở thẳng menu rank (không tốn lượt gọi API, dùng được cả khi chưa có API Key). Tắt bằng `intercept-chat: false`.
+- Bấm vào một rank để xem số tiền, số tài khoản (bấm để sao chép) và nút mở mã QR. Việc gift rank do staff làm thủ công, plugin không cấp rank và không xác nhận giao dịch.
+- Link QR/Discord chỉ chấp nhận `https://`.
+
+
+## GitHub Actions build
+
+Repository đã được sắp xếp dạng flat: các file `.java`, `plugin.yml`, `config.yml`,
+`knowledge.yml` và `shop.yml` nằm ở thư mục gốc. Khai báo `package` trong Java
+được giữ nguyên; Maven biên dịch các file Java ở thư mục gốc.
+
+GitHub Actions tự build khi push hoặc mở pull request vào `main`, hoặc chạy thủ công
+tại tab **Actions**. File JAR được tạo tại `target/AstraxAI.jar`.

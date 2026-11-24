@@ -1,4 +1,4 @@
-package com.astrax.ai;
+package com.astrax.ai.chat;
 
 import java.util.Map;
 import java.util.UUID;

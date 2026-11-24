@@ -1,0 +1,67 @@
+# =====================================================================
+# AstraxAI - Bảng giá Rank và thông tin thanh toán
+# Người chơi hỏi về rank/nạp tiền (hoặc bấm "Hỏi về Rank" trong menu) sẽ
+# được mở menu rank thay vì chờ AI trả lời. Sửa xong dùng /astraai reload.
+# Dùng dấu cách để thụt lề, không dùng Tab.
+# =====================================================================
+
+enabled: true
+
+# Khi người chơi gõ /ai có chữ như rank, nạp, donate, bảng giá, bank...
+# thì mở thẳng menu rank (không tốn lượt gọi API).
+intercept-chat: true
+
+# Link ảnh mã QR (phải bắt đầu bằng https://). Để trống nếu chưa có.
+# Tải ảnh QR lên imgur/ibb rồi dán link vào đây. Người chơi sẽ thấy nút bấm để mở.
+qr-url: ""
+
+# Link Discord để người chơi liên hệ staff (https://...). Để trống nếu chưa có.
+discord-url: ""
+
+bank:
+  name: "Techcombank"
+  account: "9368314722"
+  holder: "NGUYEN THANH DAT"
+
+# Dòng nhắc người chơi khi chuyển khoản (để trống nếu không cần)
+transfer-note: "Ghi tên nhân vật trong game vào nội dung chuyển khoản"
+
+# Tối đa 7 rank. material là tên vật phẩm Minecraft hiển thị trong menu.
+# perks là danh sách quyền lợi (điền thêm khi có).
+ranks:
+  pro:
+    name: "Pro"
+    bank-price: "29.000đ"
+    card-price: "40.000đ"
+    material: IRON_INGOT
+    perks: []
+  platinum:
+    name: "Platinum"
+    bank-price: "100.000đ"
+    card-price: "120.000đ"
+    material: GOLD_INGOT
+    perks: []
+  ruby:
+    name: "Ruby"
+    bank-price: "259.000đ"
+    card-price: "279.000đ"
+    material: REDSTONE_BLOCK
+    perks: []
+  trial:
+    name: "Trial"
+    bank-price: "499.000đ"
+    card-price: "549.000đ"
+    material: DIAMOND
+    perks: []
+  tejo:
+    name: "Tejo"
+    bank-price: "800.000đ"
+    card-price: "900.000đ"
+    material: NETHERITE_INGOT
+    perks: []
+  apex:
+    name: "Apex"
+    bank-price: "1.500.000đ"
+    card-price: "1.650.000đ"
+    material: NETHER_STAR
+    perks: []

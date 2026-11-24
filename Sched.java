@@ -1,4 +1,4 @@
-package com.astrax.ai;
+package com.astrax.ai.util;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.IllegalPluginAccessException;

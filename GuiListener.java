@@ -1,5 +1,8 @@
-package com.astrax.ai;
+package com.astrax.ai.gui;
 
+import com.astrax.ai.AstraxAI;
+import com.astrax.ai.chat.ChatService;
+import com.astrax.ai.util.Text;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -8,6 +11,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryHolder;
 
 /** Xử lý thao tác trong menu AstraxAI. Mọi thao tác nhặt/di chuyển vật phẩm đều bị chặn. */
 public final class GuiListener implements Listener {
@@ -20,7 +24,8 @@ public final class GuiListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onClick(InventoryClickEvent event) {
-        if (!(event.getView().getTopInventory().getHolder() instanceof MainMenu.Holder)) {
+        InventoryHolder top = event.getView().getTopInventory().getHolder();
+        if (!isOurs(top)) {
             return;
         }
         event.setCancelled(true);
@@ -29,19 +34,30 @@ public final class GuiListener implements Listener {
             return;
         }
         Inventory clicked = event.getClickedInventory();
-        if (clicked == null || !(clicked.getHolder() instanceof MainMenu.Holder)) {
+        if (clicked == null || !isOurs(clicked.getHolder())) {
             return;
         }
         final int slot = event.getSlot();
+        final boolean rankMenu = top instanceof RankMenu.Holder;
         // Thực hiện ở tick sau để tránh đóng inventory ngay trong lúc xử lý sự kiện click.
-        Bukkit.getScheduler().runTask(plugin, () -> handle(player, slot));
+        Bukkit.getScheduler().runTask(plugin, () -> {
+            if (rankMenu) {
+                plugin.rankMenu().handleClick(player, slot);
+            } else {
+                handle(player, slot);
+            }
+        });
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onDrag(InventoryDragEvent event) {
-        if (event.getView().getTopInventory().getHolder() instanceof MainMenu.Holder) {
+        if (isOurs(event.getView().getTopInventory().getHolder())) {
             event.setCancelled(true);
         }
+    }
+
+    private static boolean isOurs(InventoryHolder holder) {
+        return holder instanceof MainMenu.Holder || holder instanceof RankMenu.Holder;
     }
 
     private void handle(Player player, int slot) {
@@ -64,7 +80,13 @@ public final class GuiListener implements Listener {
             case MainMenu.SLOT_GUIDE -> ask(player, ChatService.QUESTION_GUIDE);
             case MainMenu.SLOT_BOSS -> ask(player, ChatService.QUESTION_BOSS);
             case MainMenu.SLOT_RELIC -> ask(player, ChatService.QUESTION_RELIC);
-            case MainMenu.SLOT_RANK -> ask(player, ChatService.QUESTION_RANK);
+            case MainMenu.SLOT_RANK -> {
+                if (plugin.rankMenu().isEnabled()) {
+                    plugin.rankMenu().open(player);
+                } else {
+                    ask(player, ChatService.QUESTION_RANK);
+                }
+            }
             case MainMenu.SLOT_ADMIN -> {
                 player.closeInventory();
                 // Kiểm tra lại quyền ở thời điểm bấm, không tin vào việc nút đã hiển thị.

@@ -1,4 +1,4 @@
-package com.astrax.ai;
+package com.astrax.ai.util;
 
 import java.util.regex.Pattern;
 

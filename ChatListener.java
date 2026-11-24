@@ -1,5 +1,7 @@
-package com.astrax.ai;
+package com.astrax.ai.chat;
 
+import com.astrax.ai.AstraxAI;
+import com.astrax.ai.util.Text;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Bukkit;

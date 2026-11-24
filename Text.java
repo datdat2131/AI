@@ -1,6 +1,8 @@
-package com.astrax.ai;
+package com.astrax.ai.util;
 
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.event.ClickEvent;
+import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
@@ -32,6 +34,13 @@ public final class Text {
 
     public static void sendRaw(CommandSender to, String legacy) {
         to.sendMessage(color(legacy));
+    }
+
+    /** Liên kết bấm được (chỉ dùng cho URL https do admin cấu hình, không bao giờ từ AI/người chơi). */
+    public static Component link(String label, String url) {
+        return Component.text(label, NamedTextColor.AQUA, TextDecoration.UNDERLINED)
+                .clickEvent(ClickEvent.openUrl(url))
+                .hoverEvent(HoverEvent.showText(Component.text("Bấm để mở liên kết", NamedTextColor.GRAY)));
     }
 
     /** Tên/lore của vật phẩm GUI: tắt chữ nghiêng mặc định. */

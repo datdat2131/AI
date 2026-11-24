@@ -1,5 +1,6 @@
-package com.astrax.ai;
+package com.astrax.ai.chat;
 
+import com.astrax.ai.AstraxAI;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;

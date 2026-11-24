@@ -1,5 +1,20 @@
 package com.astrax.ai;
 
+import com.astrax.ai.admin.AdminService;
+import com.astrax.ai.admin.ServerMonitor;
+import com.astrax.ai.admin.WarningTracker;
+import com.astrax.ai.api.AiClient;
+import com.astrax.ai.chat.ChatInputManager;
+import com.astrax.ai.chat.ChatListener;
+import com.astrax.ai.chat.ChatService;
+import com.astrax.ai.chat.KnowledgeBase;
+import com.astrax.ai.command.AdminCommand;
+import com.astrax.ai.command.AiCommand;
+import com.astrax.ai.gui.GuiListener;
+import com.astrax.ai.gui.MainMenu;
+import com.astrax.ai.gui.RankMenu;
+import com.astrax.ai.memory.ChatMemory;
+import com.astrax.ai.util.Settings;
 import org.bukkit.Bukkit;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.command.TabExecutor;
@@ -27,6 +42,7 @@ public final class AstraxAI extends JavaPlugin {
     private ChatService chatService;
     private AdminService adminService;
     private MainMenu menu;
+    private RankMenu rankMenu;
 
     @Override
     public void onEnable() {
@@ -45,6 +61,8 @@ public final class AstraxAI extends JavaPlugin {
         this.chatService = new ChatService(this);
         this.adminService = new AdminService(this);
         this.menu = new MainMenu(this);
+        this.rankMenu = new RankMenu(this);
+        this.rankMenu.load();
 
         registerCommand("ai", new AiCommand(this));
         registerCommand("astraai", new AdminCommand(this));
@@ -68,7 +86,8 @@ public final class AstraxAI extends JavaPlugin {
     public void onDisable() {
         // Đóng menu đang mở để người chơi không giữ inventory của plugin đã tắt.
         for (Player player : Bukkit.getOnlinePlayers()) {
-            if (player.getOpenInventory().getTopInventory().getHolder() instanceof MainMenu.Holder) {
+            Object holder = player.getOpenInventory().getTopInventory().getHolder();
+            if (holder instanceof MainMenu.Holder || holder instanceof RankMenu.Holder) {
                 player.closeInventory();
             }
         }
@@ -106,7 +125,9 @@ public final class AstraxAI extends JavaPlugin {
         this.settings = fresh;
         this.client = new AiClient(fresh, executor);
         this.memory.configure(fresh.memoryEnabled, fresh.maxHistory);
-        return knowledge.load(fresh.knowledgeMaxChars);
+        boolean knowledgeOk = knowledge.load(fresh.knowledgeMaxChars);
+        boolean shopOk = rankMenu.load();
+        return knowledgeOk && shopOk;
     }
 
     private void registerCommand(String name, TabExecutor handler) {
@@ -173,5 +194,9 @@ public final class AstraxAI extends JavaPlugin {
 
     public MainMenu menu() {
         return menu;
+    }
+
+    public RankMenu rankMenu() {
+        return rankMenu;
     }
 }

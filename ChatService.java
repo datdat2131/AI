@@ -1,5 +1,14 @@
-package com.astrax.ai;
+package com.astrax.ai.chat;
 
+import com.astrax.ai.AstraxAI;
+import com.astrax.ai.api.AiResult;
+import com.astrax.ai.api.ChatMessage;
+import com.astrax.ai.memory.ChatMemory;
+import com.astrax.ai.util.CooldownManager;
+import com.astrax.ai.util.Sanitizer;
+import com.astrax.ai.util.Sched;
+import com.astrax.ai.util.Settings;
+import com.astrax.ai.util.Text;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -45,6 +54,14 @@ public final class ChatService {
             Text.send(player, "&cBạn không có quyền sử dụng AI Chat.");
             return;
         }
+
+        // Hỏi về rank/nạp tiền: mở thẳng menu rank (không cần gọi API, vẫn dùng được khi chưa có API Key).
+        if (plugin.rankMenu().shouldIntercept(rawMessage)) {
+            Text.send(player, "&aMình mở bảng giá rank cho bạn nhé!");
+            plugin.rankMenu().open(player);
+            return;
+        }
+
         if (!settings.hasApiKey()) {
             Text.send(player, "&cTrợ lý AI chưa được cấu hình. Hãy báo cho admin.");
             return;

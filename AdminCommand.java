@@ -1,5 +1,7 @@
-package com.astrax.ai;
+package com.astrax.ai.command;
 
+import com.astrax.ai.AstraxAI;
+import com.astrax.ai.util.Text;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
@@ -40,9 +42,9 @@ public final class AdminCommand implements TabExecutor {
         }
         boolean knowledgeOk = plugin.reloadAll();
         if (knowledgeOk) {
-            Text.send(sender, "&aĐã reload config.yml và knowledge.yml.");
+            Text.send(sender, "&aĐã reload config.yml, knowledge.yml và shop.yml.");
         } else {
-            Text.send(sender, "&eĐã reload config.yml nhưng knowledge.yml bị lỗi, hãy xem console.");
+            Text.send(sender, "&eĐã reload config.yml nhưng knowledge.yml hoặc shop.yml bị lỗi, hãy xem console.");
         }
         if (!plugin.settings().hasApiKey()) {
             Text.send(sender, "&eLưu ý: chưa cấu hình API Key nên AI chưa hoạt động.");
