@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # Khôi phục cấu trúc thư mục Maven từ bản zip phẳng. Chạy: bash restore.sh
-set -e
+set -euo pipefail
+# Recreate output project cleanly so stale files cannot affect builds.
+rm -rf AstraxAI
 mkdir -p AstraxAI && cd AstraxAI
 mkdir -p "src/main/java/com/astrax/ai/util" && cp "../CooldownManager.java" "src/main/java/com/astrax/ai/util/CooldownManager.java"
 mkdir -p "src/main/java/com/astrax/ai/util" && cp "../Sched.java" "src/main/java/com/astrax/ai/util/Sched.java"
