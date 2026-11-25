@@ -29,6 +29,7 @@ public final class AdminCommand implements TabExecutor {
             case "status" -> plugin.adminService().status(sender);
             case "diagnose" -> plugin.adminService().diagnose(sender);
             case "report" -> plugin.adminService().report(sender);
+            case "plugins" -> plugin.adminService().plugins(sender);
             case "reload" -> reload(sender);
             default -> sendUsage(sender, label);
         }
@@ -64,6 +65,7 @@ public final class AdminCommand implements TabExecutor {
             Text.sendRaw(sender, "&e/" + label + " status &7- Xem TPS, MSPT, RAM, người chơi, plugin");
             Text.sendRaw(sender, "&e/" + label + " diagnose &7- AI chẩn đoán nhanh tình trạng server");
             Text.sendRaw(sender, "&e/" + label + " report &7- AI tạo báo cáo đầy đủ và lưu thành file");
+            Text.sendRaw(sender, "&e/" + label + " plugins &7- Xem những plugin và lệnh AI đã đọc được");
         }
         if (sender.hasPermission("astraxai.reload")) {
             Text.sendRaw(sender, "&e/" + label + " reload &7- Nạp lại config.yml và knowledge.yml");
@@ -81,6 +83,7 @@ public final class AdminCommand implements TabExecutor {
             options.add("status");
             options.add("diagnose");
             options.add("report");
+            options.add("plugins");
         }
         if (sender.hasPermission("astraxai.reload")) {
             options.add("reload");

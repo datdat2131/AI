@@ -2,7 +2,9 @@ package com.astrax.ai.util;
 
 import org.bukkit.configuration.file.FileConfiguration;
 
+import java.util.HashSet;
 import java.util.Locale;
+import java.util.Set;
 
 /**
  * Bản chụp bất biến của config.yml. Mỗi lần reload sẽ tạo một Settings mới.
@@ -33,6 +35,12 @@ public final class Settings {
 
     public final int threads;
     public final int knowledgeMaxChars;
+
+    public final boolean pluginsEnabled;
+    public final boolean pluginsPublicOnly;
+    public final int pluginsMaxChars;
+    public final int pluginsMaxCommands;
+    public final Set<String> pluginsExclude;
 
     public Settings(FileConfiguration c) {
         String key = trim(c.getString("api.key", ""));
@@ -69,6 +77,19 @@ public final class Settings {
 
         this.threads = clamp(c.getInt("advanced.threads", 2), 1, 8);
         this.knowledgeMaxChars = clamp(c.getInt("advanced.knowledge-max-chars", 12000), 1000, 100000);
+
+        // Các khóa này có giá trị mặc định nên config.yml cũ (chưa có mục plugin-knowledge) vẫn chạy bình thường.
+        this.pluginsEnabled = c.getBoolean("plugin-knowledge.enabled", true);
+        this.pluginsPublicOnly = c.getBoolean("plugin-knowledge.public-commands-only", true);
+        this.pluginsMaxChars = clamp(c.getInt("plugin-knowledge.max-chars", 6000), 500, 50000);
+        this.pluginsMaxCommands = clamp(c.getInt("plugin-knowledge.max-commands-per-plugin", 15), 1, 100);
+        Set<String> excluded = new HashSet<>();
+        for (String name : c.getStringList("plugin-knowledge.exclude")) {
+            if (name != null && !name.isBlank()) {
+                excluded.add(name.trim().toLowerCase(Locale.ROOT));
+            }
+        }
+        this.pluginsExclude = Set.copyOf(excluded);
     }
 
     public boolean hasApiKey() {

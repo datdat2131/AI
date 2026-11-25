@@ -8,6 +8,7 @@ import com.astrax.ai.chat.ChatInputManager;
 import com.astrax.ai.chat.ChatListener;
 import com.astrax.ai.chat.ChatService;
 import com.astrax.ai.chat.KnowledgeBase;
+import com.astrax.ai.chat.PluginKnowledge;
 import com.astrax.ai.command.AdminCommand;
 import com.astrax.ai.command.AiCommand;
 import com.astrax.ai.gui.GuiListener;
@@ -43,6 +44,7 @@ public final class AstraxAI extends JavaPlugin {
     private AdminService adminService;
     private MainMenu menu;
     private RankMenu rankMenu;
+    private PluginKnowledge pluginKnowledge;
 
     @Override
     public void onEnable() {
@@ -63,12 +65,15 @@ public final class AstraxAI extends JavaPlugin {
         this.menu = new MainMenu(this);
         this.rankMenu = new RankMenu(this);
         this.rankMenu.load();
+        this.pluginKnowledge = new PluginKnowledge(this);
+        this.pluginKnowledge.refresh();
 
         registerCommand("ai", new AiCommand(this));
         registerCommand("astraai", new AdminCommand(this));
 
         Bukkit.getPluginManager().registerEvents(new ChatListener(this), this);
         Bukkit.getPluginManager().registerEvents(new GuiListener(this), this);
+        Bukkit.getPluginManager().registerEvents(pluginKnowledge, this);
 
         // Chỉ ghi trạng thái, tuyệt đối không ghi nội dung API Key.
         getLogger().info("AstraxAI đã bật. Model: " + settings.model
@@ -127,6 +132,7 @@ public final class AstraxAI extends JavaPlugin {
         this.memory.configure(fresh.memoryEnabled, fresh.maxHistory);
         boolean knowledgeOk = knowledge.load(fresh.knowledgeMaxChars);
         boolean shopOk = rankMenu.load();
+        pluginKnowledge.refresh();
         return knowledgeOk && shopOk;
     }
 
@@ -198,5 +204,9 @@ public final class AstraxAI extends JavaPlugin {
 
     public RankMenu rankMenu() {
         return rankMenu;
+    }
+
+    public PluginKnowledge pluginKnowledge() {
+        return pluginKnowledge;
     }
 }

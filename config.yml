@@ -60,6 +60,27 @@ admin:
   # Thời gian chờ giữa 2 lần phân tích của Admin AI (giây)
   cooldown-seconds: 30
 
+plugin-knowledge:
+  # Cho AI tự đọc danh sách plugin và lệnh đang chạy trên server (tên, phiên bản, mô tả, lệnh)
+  # để giải thích cho người chơi. Chỉ đọc qua API của server: không đọc file jar, file cấu hình
+  # hay log của plugin nào. Tắt tính năng này bằng enabled: false.
+  enabled: true
+
+  # true = AI chỉ biết các lệnh mà người chơi thường dùng được (không cần quyền, hoặc quyền mặc định
+  # cho tất cả) và bỏ qua plugin không có lệnh công khai (ví dụ anti-cheat). Nên để true.
+  # Lưu ý: quyền do plugin phân quyền (như LuckPerms) cấp thêm thì plugin không biết được,
+  # lệnh đó sẽ không hiện ra. Đặt false nếu muốn AI biết mọi lệnh (kể cả lệnh admin).
+  public-commands-only: true
+
+  # Số ký tự tối đa của phần plugin gửi cho AI (nhiều hơn = tốn token hơn mỗi câu hỏi)
+  max-chars: 6000
+
+  # Số lệnh tối đa hiển thị cho mỗi plugin
+  max-commands-per-plugin: 15
+
+  # Plugin KHÔNG cho AI biết (viết tên plugin, không phân biệt hoa thường)
+  exclude: []
+
 advanced:
   # Số luồng (thread) xử lý API (cần khởi động lại server để áp dụng)
   threads: 2

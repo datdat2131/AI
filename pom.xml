@@ -45,23 +45,21 @@
     <build>
         <finalName>AstraxAI</finalName>
 
-        <sourceDirectory>${project.basedir}</sourceDirectory>
         <resources>
+            <!-- Chi plugin.yml duoc loc de chen ${project.version} -->
             <resource>
-                <directory>${project.basedir}</directory>
+                <directory>src/main/resources</directory>
                 <filtering>true</filtering>
                 <includes>
                     <include>plugin.yml</include>
                 </includes>
             </resource>
             <resource>
-                <directory>${project.basedir}</directory>
+                <directory>src/main/resources</directory>
                 <filtering>false</filtering>
-                <includes>
-                    <include>config.yml</include>
-                    <include>knowledge.yml</include>
-                    <include>shop.yml</include>
-                </includes>
+                <excludes>
+                    <exclude>plugin.yml</exclude>
+                </excludes>
             </resource>
         </resources>
 
@@ -71,7 +69,6 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.13.0</version>
                 <configuration>
-                    <includes><include>*.java</include></includes>
                     <release>${maven.compiler.release}</release>
                     <parameters>true</parameters>
                 </configuration>

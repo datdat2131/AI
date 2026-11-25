@@ -69,12 +69,11 @@ Mặc định dùng Messages API của Anthropic (`format: "anthropic"`, model `
 - Bấm vào một rank để xem số tiền, số tài khoản (bấm để sao chép) và nút mở mã QR. Việc gift rank do staff làm thủ công, plugin không cấp rank và không xác nhận giao dịch.
 - Link QR/Discord chỉ chấp nhận `https://`.
 
+## 7. AI tự đọc plugin của server (plugin-knowledge)
 
-## GitHub Actions build
-
-Repository đã được sắp xếp dạng flat: các file `.java`, `plugin.yml`, `config.yml`,
-`knowledge.yml` và `shop.yml` nằm ở thư mục gốc. Khai báo `package` trong Java
-được giữ nguyên; Maven biên dịch các file Java ở thư mục gốc.
-
-GitHub Actions tự build khi push hoặc mở pull request vào `main`, hoặc chạy thủ công
-tại tab **Actions**. File JAR được tạo tại `target/AstraxAI.jar`.
+- Khi server khởi động xong và mỗi lần `/astraai reload`, AstraxAI lấy danh sách plugin đang chạy (tên, phiên bản, mô tả) và các lệnh chúng đăng ký (cú pháp, mô tả, bí danh) rồi đưa vào hiểu biết của AI. Nhờ vậy AI giải thích được "lệnh /home dùng thế nào" mà bạn không phải tự viết vào `knowledge.yml`.
+- Chỉ đọc qua API của server. Plugin **không** đọc file jar, file cấu hình, log hay thư mục của plugin nào, và AI không chạy được lệnh.
+- Mặc định (`public-commands-only: true`) AI chỉ biết các lệnh người chơi thường dùng được và bỏ qua plugin không có lệnh công khai (ví dụ anti-cheat), để không lộ lệnh admin. Quyền do LuckPerms cấp thêm thì plugin không biết được; muốn AI biết hết thì đặt `false`.
+- Admin dùng `/astraai plugins` để xem AI đã đọc được plugin nào, bao nhiêu lệnh. `/astraai diagnose` và `report` cũng dùng chi tiết plugin này.
+- Mục `plugin-knowledge` trong `config.yml` chỉnh được: bật/tắt, giới hạn ký tự (`max-chars`, mặc định 6000, càng nhiều càng tốn token), số lệnh mỗi plugin, và danh sách `exclude` (plugin không cho AI biết).
+- `config.yml` cũ chưa có mục này vẫn chạy với giá trị mặc định ở trên.
